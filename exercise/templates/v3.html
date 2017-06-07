@@ -1,0 +1,42 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  </script> 
+  <script>
+var api = 'http://localhost:5000/play?choice=';
+$(document).ready( () => {
+  $('#choices').on('click', (event) => {
+    $.get(api + event.target.id, (data) => {
+      data = JSON.parse(data);
+      console.log(data);
+      $('#you').text('You picked: ' + data.you);
+      $('#comp').text('Computer picked: ' + data.comp);
+      $('#win').text('You ' + data.win + '!');
+      $('#total').text(data.total +
+          ' total wins for ' +
+          data.name);
+    });
+  });
+});
+  </script>
+</head>
+
+<body>
+  <h1>Rock, Paper, Scissors</h1>
+  <ul id="choices">
+    <li id="rock">Pick ROCK</li>
+    <li id="paper">Pick PAPER</li>
+    <li id="scissors">Pick SCISSORS</li>
+  </ul>
+  <hr>
+  <ul id="results">
+    <li id="you"></li>
+    <li id="comp"></li>
+    <li id="win"></li>
+    <li id="total"></li>
+  </ul>
+  <hr>
+  <form id="login" action="/login" method="POST">
+    <input name="login" placeholder=" enter your name">
+    <input type="submit">
+  </form>
+</body>
